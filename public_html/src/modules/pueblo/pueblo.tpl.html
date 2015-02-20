@@ -1,0 +1,68 @@
+<div ng-controller="puebloCtrl as puebloCtrl">
+	<div id="header">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#country-navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Pueblo</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="country-navbar">
+					<button class="btn btn-default navbar-btn" ng-hide="puebloCtrl.editMode" ng-click="puebloCtrl.createRecord()"><span class="glyphicon glyphicon-plus"></span> Create</button>
+					<button class="btn btn-default navbar-btn" ng-hide="puebloCtrl.editMode" ng-click="puebloCtrl.fetchRecords()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+					<button class="btn btn-default navbar-btn" ng-show="puebloCtrl.editMode" ng-click="puebloCtrl.saveRecord()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+					<button class="btn btn-default navbar-btn" ng-show="puebloCtrl.editMode" ng-click="puebloCtrl.fetchRecords()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div ng-hide="puebloCtrl.editMode">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Numero de Hombre</th>
+                                        <th>Numero de Mujeres</th>
+                                        <th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="record in records">
+					<td>{{record.name}}</td>
+					<td>{{record.numHombres}}</td>
+                                        <td>{{record.numMujeres}}</td>
+					<td>
+						<button class="btn btn-default btn-sm" ng-click="puebloCtrl.editRecord(record)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+						<button class="btn btn-default btn-sm" ng-click="puebloCtrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Delete</button>
+						<button class="btn btn-default btn-sm" ng-click="puebloCtrl.totalPoblacion(record)"><span class="glyphicon glyphicon-minus"></span> TotalPoblacion</button>
+
+                                        </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="puebloCtrl.editMode">
+		<form name="countryForm" role="form">
+			<input id="name" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input id="name" class="form-control" type="text" ng-model="currentRecord.name"/>
+			</div>
+			<div class="form-group">
+				<label for="numHombres">Numero de Hombres</label>
+				<input id="numHombres" class="form-control" type="number" ng-model="currentRecord.numHombres"/>
+			</div>		
+                        <div class="form-group">
+				<label for="numHombres">Numero de Mujeres</label>
+				<input id="numHombres" class="form-control" type="number" ng-model="currentRecord.numMujeres"/>
+			</div>
+		</form>
+	</div>
+</div>
